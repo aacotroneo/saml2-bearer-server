@@ -1,0 +1,21 @@
+{
+    "name": "Aac/saml2-bearer-server",
+    "description": "This is a demo project that implements an Oauth2 server that handles saml2-bearer authorization grants.",
+    "license":"MIT",
+    "homepage": "https://github.com/aacotroneo/saml2-bearer-server",
+    "autoload": {
+        "psr-4": {"Aac\\": "src/"}
+    },
+    "autoload-dev": {
+        "psr-4": { "Aac\\": "test/" }
+    },
+    "require": {
+        "php": ">=5.3.9",
+        "bshaffer/oauth2-server-php": "v1.6", //actually this version does not have saml2-bearer grant.Be sure to change it
+        "onelogin/php-saml": "v2.3",
+        "slim/slim": "2.*",
+        "slim/views": "*",
+        "twig/twig" :"~1.0",
+        "monolog/monolog" : "1.12"
+    }
+}
