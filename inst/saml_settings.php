@@ -10,9 +10,8 @@
  * But I haven't found a way to make such a valid token in PHP (name it: simplesamlphp), but I'm sure there are tools
  * around that can make that.
  *
- * In the meantime, I'm using 'strict' => false, which ignores most of those validations, It just checks signatures!
- * Providing that your clients are of trust and make back-channel requests with their credentials, It may be acceptable,
- * but be careful anyway!!
+ * In the meantime, I'm using 'strict' => false, which ignores most of those validations, It just checks signatures.
+ * That's good enough for development, but please don't use that in production.
  *
  */
 $spBaseUrl = 'http://localhost/oauth'; //or http://<your_domain>
