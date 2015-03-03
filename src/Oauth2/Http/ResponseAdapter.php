@@ -2,16 +2,14 @@
 
 namespace Aac\Oauth2\Http;
 
-
 use OAuth2\ResponseInterface;
 
 /**
  * A sample adapter to use the same request object for slim and bshaffer/Oauth2
  * Class ResponseAdapter
  */
-class ResponseAdapter extends \Slim\Http\Response implements ResponseInterface{
-
-
+class ResponseAdapter extends \Slim\Http\Response implements ResponseInterface
+{
     public function __construct($body = '', $status = 200, $headers = array())
     {
         parent::__construct($body, $status, $headers);
@@ -20,19 +18,19 @@ class ResponseAdapter extends \Slim\Http\Response implements ResponseInterface{
 
     public function finalize()
     {
-        if(!empty($this->parameters)){
+        if (!empty($this->parameters)) {
             $body = $this->getBody();
-            if(!empty($body)){
+            if (!empty($body)) {
                 throw new \Exception("Params where added to the response, but other output was found also");
             }
             $this->body(json_encode($this->parameters));
 
             $this->addHttpHeaders(array("Content-Type" => 'application/json'));
         }
+
        return parent::finalize();
 
     }
-
 
     public function addParameters(array $parameters)
     {

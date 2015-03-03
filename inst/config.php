@@ -4,8 +4,8 @@ return array(
     'templates.path' => __DIR__ . "/../src/Oauth2/View",
     'view' => new Slim\Views\Twig(),
 
-    'bd' => array(
-        'dsn' => 'pgsql:host=localhost;port=5432;dbname=oauth',
+    'db' => array(
+        'dsn' => 'pgsql:host=localhost;port=5432;dbname=oauth2_server_php',
         'username' => 'postgres',
         'password' => 'postgres'
     ),
