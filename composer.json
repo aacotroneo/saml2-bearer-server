@@ -11,7 +11,7 @@
     },
     "require": {
         "php": ">=5.3.9",
-        "bshaffer/oauth2-server-php": "v1.6", //actually this version does not have saml2-bearer grant.Be sure to change it
+        "bshaffer/oauth2-server-php":"dev-develop",
         "onelogin/php-saml": "v2.3",
         "slim/slim": "2.*",
         "slim/views": "*",

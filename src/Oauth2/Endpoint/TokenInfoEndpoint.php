@@ -1,15 +1,11 @@
 <?php
 namespace Aac\Oauth2\Endpoint;
 
-
-use Slim\Slim;
-
 class TokenInfoEndpoint extends Endpoint
 {
 
-    function run()
+    public function run()
     {
-
         $server = $this->container->oauthServer;
 
         $token = $server->getAccessTokenData($this->request);
@@ -19,8 +15,5 @@ class TokenInfoEndpoint extends Endpoint
         } else {
             $this->jsonResponse(array('error' => 'Token is invalid or expired'));
         }
-
     }
-
-
 }

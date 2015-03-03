@@ -1,6 +1,6 @@
 <?php
 
-namespace Aac\OAuth2;
+namespace Aac\Oauth2;
 
 use Aac\Oauth2\Endpoint\AuthorizeEndpoint;
 use Aac\Oauth2\Endpoint\TokenEndpoint;
@@ -8,14 +8,21 @@ use Aac\Oauth2\Endpoint\TokenInfoEndpoint;
 use Aac\Oauth2\Http\RequestAdapter;
 use Aac\Oauth2\Http\ResponseAdapter;
 
-use OAuth2\Scope;
+use OAuth2\Server;
+use OAuth2\Storage\Pdo;
 use OAuth2\Storage\Memory;
+use OAuth2\GrantType\Saml2Bearer;
+use OAuth2\GrantType\ClientCredentials;
+use OAuth2\GrantType\AuthorizationCode;
+use OAuth2\Scope;
+
 use Slim\Slim;
 
-class App {
+class App
+{
+    public $app;
 
-
-    function __construct($config)
+    public function __construct($config)
     {
         $app = new Slim($config);
         $this->configure($app);
@@ -34,7 +41,6 @@ class App {
             $ep->run();
         })->via('GET', 'POST');
 
-
         $app->post('/token', function () use ($app) {
             $ep = new TokenEndpoint($app);
             $ep->run();
@@ -46,12 +52,11 @@ class App {
             $ep->run();
         });
 
-
+        $app->run();
     }
 
     protected function configure(Slim $app)
     {
-
         $app->container->singleton('request', function ($c) {
             //Use adapter so slim and oauth2 library works with the same object
             return new RequestAdapter($c['environment']); //Request::createFromGlobals();
@@ -68,29 +73,25 @@ class App {
             } else {
                 die("couldn find settings file in ['settings']['saml']['settings_file'] ");
             }
-
         });
 
         $app->container->singleton('oauthServer', function ($c) {
             //basic set up
             $settings =  $c['settings'];
 
-            $storage = new  \OAuth2\Storage\Pdo($settings['bd']);
+            $storage = new Pdo($settings['db']);
 
-            $server = new \OAuth2\Server($storage);
-
+            $server = new Server($storage);
 
             //saml-bearer grant! This conf is actually the file from /inst/saml_settings.php
             //and its almost directly handled by onelogin/php-saml library
             //refer to onelogin/php-saml for more information.
             //Note that you will have to properly configure saml IDP
-            $server->addGrantType(new \OAuth2\GrantType\Saml2Bearer($c['saml_settings']));
-
+            $server->addGrantType(new Saml2Bearer($c['saml_settings']));
 
             //just in case you only want to see how to set up basic stuff using slim
-            $server->addGrantType(new \OAuth2\GrantType\ClientCredentials($storage));
-            $server->addGrantType(new \OAuth2\GrantType\AuthorizationCode($storage));
-
+            $server->addGrantType(new ClientCredentials($storage));
+            $server->addGrantType(new AuthorizationCode($storage));
 
             $defaultScope = 'basic';
             $supportedScopes = array(
@@ -106,12 +107,9 @@ class App {
             $scopeUtil = new Scope($memory);
             $server->setScopeUtil($scopeUtil);
 
-
             return $server;
-
         });
-
 
     }
 
-} 
+}
