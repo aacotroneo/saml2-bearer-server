@@ -9,12 +9,10 @@ class AuthorizeEndpoint extends Endpoint
     /** @var $server Server */
     protected $server;
 
-    /**@var $container Slim*/
-    protected $container;
-
     public function __construct(Slim $container)
     {
         parent::__construct($container);
+
         $this->server = $container->oauthServer;
     }
 
