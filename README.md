@@ -16,7 +16,15 @@ This is a demo project that implements an Oauth2 server that handles saml2-beare
     # composer install
     ```
 
-    > Currently, as this is in development, you'll need to update the `bshaffer/oauth2-server-php` dependency to be `aacotroneo/oauth2-server-php`, but this will not be required as soon as we merge PR [#510](https://github.com/bshaffer/oauth2-server-php/pull/510)
+    > Currently, as this is in development, you'll need to update the `bshaffer/oauth2-server-php` dependency to be `aacotroneo/oauth2-server-php`, but this will not be required as soon as we merge PR [#510](https://github.com/bshaffer/oauth2-server-php/pull/510). For now, add the following to the composer.json
+    ```  
+    "repositories": [
+        {
+            "type": "vcs",
+            "url" : "https://github.com/aacotroneo/oauth2-server-php"
+        }
+    ], 
+    ```    
 3. Start the PHP web server
 
     ```
