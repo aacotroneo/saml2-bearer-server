@@ -9,6 +9,12 @@
     "autoload-dev": {
         "psr-4": { "Aac\\": "test/" }
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url" : "https://github.com/aacotroneo/oauth2-server-php"
+        }
+    ],
     "require": {
         "php": ">=5.3.9",
         "bshaffer/oauth2-server-php":"dev-develop",
@@ -16,6 +22,7 @@
         "slim/slim": "2.*",
         "slim/views": "*",
         "twig/twig" :"~1.0",
-        "monolog/monolog" : "1.12"
+        "monolog/monolog" : "1.12",
+        "guzzlehttp/guzzle" : "^5.0"
     }
 }

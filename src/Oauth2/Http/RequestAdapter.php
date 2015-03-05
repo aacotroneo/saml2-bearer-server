@@ -5,7 +5,7 @@ use OAuth2\RequestInterface;
 
 /**
  * A sample adapter to use the same request for slim and bshaffer/Oauth2
- * Class RequestAdapter
+ * Class RequestAdapter.
  */
 class RequestAdapter extends \Slim\Http\Request implements  RequestInterface
 {
@@ -21,7 +21,7 @@ class RequestAdapter extends \Slim\Http\Request implements  RequestInterface
 
     public function server($name, $default = null)
     {
-        return $this->env[$name]?:$default;
+        return $this->env[$name] ?: $default;
     }
 
     public function getAllQueryParameters()

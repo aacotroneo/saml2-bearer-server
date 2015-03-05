@@ -7,7 +7,6 @@ use Aac\Oauth2\Endpoint\TokenEndpoint;
 use Aac\Oauth2\Endpoint\TokenInfoEndpoint;
 use Aac\Oauth2\Http\RequestAdapter;
 use Aac\Oauth2\Http\ResponseAdapter;
-
 use OAuth2\Server;
 use OAuth2\Storage\Pdo;
 use OAuth2\Storage\Memory;
@@ -15,7 +14,6 @@ use OAuth2\GrantType\Saml2Bearer;
 use OAuth2\GrantType\ClientCredentials;
 use OAuth2\GrantType\AuthorizationCode;
 use OAuth2\Scope;
-
 use Slim\Slim;
 
 class App
@@ -31,7 +29,7 @@ class App
             return function () {
 //                implement this if you want to add userId to the token during the authorization code grant
 //                if (!$login->isAuthenticated()) {
-//                    $login->login(); //this just redirects
+//                    $login->login();
 //                }
             };
         };
@@ -97,19 +95,17 @@ class App
             $supportedScopes = array(
                 'basic',
                 'mail',
-                'bank_account'
+                'bank_account',
             );
 
             $memory = new Memory(array(
                 'default_scope' => $defaultScope,
-                'supported_scopes' => $supportedScopes
+                'supported_scopes' => $supportedScopes,
             ));
             $scopeUtil = new Scope($memory);
             $server->setScopeUtil($scopeUtil);
 
             return $server;
         });
-
     }
-
 }

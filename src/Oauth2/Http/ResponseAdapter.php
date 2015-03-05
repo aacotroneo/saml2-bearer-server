@@ -6,7 +6,7 @@ use OAuth2\ResponseInterface;
 
 /**
  * A sample adapter to use the same request object for slim and bshaffer/Oauth2
- * Class ResponseAdapter
+ * Class ResponseAdapter.
  */
 class ResponseAdapter extends \Slim\Http\Response implements ResponseInterface
 {
@@ -28,8 +28,7 @@ class ResponseAdapter extends \Slim\Http\Response implements ResponseInterface
             $this->addHttpHeaders(array("Content-Type" => 'application/json'));
         }
 
-       return parent::finalize();
-
+        return parent::finalize();
     }
 
     public function addParameters(array $parameters)
@@ -65,13 +64,13 @@ class ResponseAdapter extends \Slim\Http\Response implements ResponseInterface
         if (!is_null($errorUri)) {
             if (strlen($errorUri) > 0 && $errorUri[0] == '#') {
                 // we are referencing an oauth bookmark (for brevity)
-                $errorUri = 'http://tools.ietf.org/html/rfc6749' . $errorUri;
+                $errorUri = 'http://tools.ietf.org/html/rfc6749'.$errorUri;
             }
             $parameters['error_uri'] = $errorUri;
         }
 
         $httpHeaders = array(
-            'Cache-Control' => 'no-store'
+            'Cache-Control' => 'no-store',
         );
 
         $this->setStatusCode($statusCode);
@@ -106,10 +105,9 @@ class ResponseAdapter extends \Slim\Http\Response implements ResponseInterface
             // add parameters to URL redirection
             $parts = parse_url($url);
             $sep = isset($parts['query']) && count($parts['query']) > 0 ? '&' : '?';
-            $url .= $sep . http_build_query($this->parameters);
+            $url .= $sep.http_build_query($this->parameters);
         }
 
         $this->redirect($url, $statusCode);
     }
-
 }

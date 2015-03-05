@@ -12,9 +12,12 @@ class TokenEndpoint extends Endpoint
     {
         $server = $this->container->oauthServer;
 
-        // Handle a request for an OAuth2.0 Access Token and send the response to the client
-        $server->handleTokenRequest($this->request, $this->response);
-
-        //yes, this simple!
+        try {
+            // Handle a request for an OAuth2.0 Access Token and send the response to the client
+            $server->handleTokenRequest($this->request, $this->response);
+        } catch (\Exception $d) {
+            $this->response->setStatusCode(202);
+            $this->response->addParameters(['message' => $d->getMessage()]);
+        }
     }
 }
