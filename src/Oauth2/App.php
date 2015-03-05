@@ -3,6 +3,7 @@
 namespace Aac\Oauth2;
 
 use Aac\Oauth2\Endpoint\AuthorizeEndpoint;
+use Aac\Oauth2\Endpoint\CreateAssertionEndpoint;
 use Aac\Oauth2\Endpoint\TokenEndpoint;
 use Aac\Oauth2\Endpoint\TokenInfoEndpoint;
 use Aac\Oauth2\Http\RequestAdapter;
@@ -47,6 +48,11 @@ class App
         $app->get('/tokeninfo', function () use ($app) {
             //helper to validate tokens
             $ep = new TokenInfoEndpoint($app);
+            $ep->run();
+        });
+
+        $app->get('/assertion', function () use ($app) {
+            $ep = new CreateAssertionEndpoint($app);
             $ep->run();
         });
 

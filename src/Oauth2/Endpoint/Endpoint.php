@@ -8,8 +8,6 @@ use Slim\Slim;
 
 abstract class Endpoint
 {
-    /**@var $container Slim */
-    protected $container;
     /** @var $request RequestAdapter */
     protected $request;
     /** @var $response ResponseAdapter */
