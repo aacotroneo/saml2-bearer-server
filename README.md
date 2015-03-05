@@ -33,6 +33,13 @@ This is a demo project that implements an Oauth2 server that handles saml2-beare
     ```
 4. Open up http://localhost:9000/tokeninfo in your browser!
 
+5. To get a token run the following sample command. It uses a harcoded valid assertion and only works in strict mode = false, which validates basic stuff and signature. It's the client responsibility to get a valid token and will depend a lot on the existing Saml2 infrastructure. 
+
+    ```
+    # php console/test.php  http://localhost:9000
+    ```
+    Note: you will need to have an existing database with a valid client (testclient:testpass) and scopes. Check the [Cookbook](http://bshaffer.github.io/oauth2-server-php-docs/cookbook/)
+
 ### Oauth2-server saml2-bearer authorization grant
 
 We use onelogin/saml to help us with the hard xml validations. I found that is not easy to find a tool in php to make standar-compliant saml2 tokens. Take a look at the comments at the [saml2 config file ] (https://github.com/aacotroneo/saml2-bearer-server/blob/master/inst/saml_settings.php)

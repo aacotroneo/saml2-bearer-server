@@ -12,7 +12,7 @@ error_reporting(E_ALL);
 if ($argc  != 2) {
     echo "\nUsage: php test [base url server]\n\n";
 } else {
-    $cli = new SampleClientEndpoint();
+    $cli = new test();
     $cli->run($argv[1]);
 }
 
